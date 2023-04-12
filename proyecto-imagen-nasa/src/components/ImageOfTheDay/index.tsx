@@ -1,14 +1,24 @@
 import { useRouter } from "next/router";
-import { Image } from "@next-js-bootcamp/types";
+import { Image as ImageTypes } from "@next-js-bootcamp/types";
+import Image from 'next/image'
 
 import styles from './ImageOfTheDay.module.css';
 
-const ImageOfTheDay = ({ url, title, date }: Image) => {
+console.log(process.env);
+
+const ImageOfTheDay = ({ url, title, date }: ImageTypes) => {
     const router = useRouter();
 
     return (
         <div className={styles.container}>
-            <img src={url} alt={title} onClick={() => router.push(`/image/${date}`)} className={styles.image} />
+            <Image 
+                src={url || ""}
+                alt={title || ""}
+                onClick={() => router.push(`/image/${date}`)}
+                className={styles.image}
+                width={200}
+                height={600} 
+             />
             <h2>{title}</h2>
         </div>
     );
